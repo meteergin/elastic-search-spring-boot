@@ -1,0 +1,6 @@
+elastic-search:
+  index: employees
+  hostname: localhost
+  port: 9200
+  username: elastic
+  password: password
