@@ -1,5 +1,5 @@
 elastic-search:
-  index: employees
+  index: countries-v1
   hostname: localhost
   port: 9200
   username: elastic

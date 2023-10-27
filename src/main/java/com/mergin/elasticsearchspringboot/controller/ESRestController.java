@@ -1,7 +1,7 @@
 package com.mergin.elasticsearchspringboot.controller;
 
 import com.mergin.elasticsearchspringboot.exception.RecordNotFoundException;
-import com.mergin.elasticsearchspringboot.model.Employee;
+import com.mergin.elasticsearchspringboot.model.BaseModel;
 import com.mergin.elasticsearchspringboot.service.ESService;
 import java.io.IOException;
 import java.util.List;
@@ -18,37 +18,37 @@ public class ESRestController {
   private final ESService esService;
 
   @GetMapping("/index/{id}")
-  public ResponseEntity<Employee> fetchEmployeeById(@PathVariable("id") String id)
+  public ResponseEntity<BaseModel> fetchModelById(@PathVariable("id") String id)
       throws RecordNotFoundException, IOException {
-    Employee employee = esService.fetchEmployeeById(id);
-    return ResponseEntity.ok(employee);
+    BaseModel model = esService.fetchModelById(id);
+    return ResponseEntity.ok(model);
   }
 
   @PostMapping("/index/fetchWithMust")
-  public ResponseEntity<List<Employee>> fetchEmployeesWithMustQuery(
-      @RequestBody Employee employeeSearchRequest) throws IOException {
-    List<Employee> employees = esService.fetchEmployeesWithMustQuery(employeeSearchRequest);
-    return ResponseEntity.ok(employees);
+  public ResponseEntity<List<BaseModel>> fetchModelsWithMustQuery(
+      @RequestBody BaseModel modelSearchRequest) throws IOException {
+    List<BaseModel> models = esService.fetchModelsWithMustQuery(modelSearchRequest);
+    return ResponseEntity.ok(models);
   }
 
   @PostMapping("/index/fetchWithShould")
-  public ResponseEntity<List<Employee>> fetchEmployeesWithShouldQuery(
-      @RequestBody Employee employeeSearchRequest) throws IOException {
-    List<Employee> employees = esService.fetchEmployeesWithShouldQuery(employeeSearchRequest);
-    return ResponseEntity.ok(employees);
+  public ResponseEntity<List<BaseModel>> fetchModelsWithShouldQuery(
+      @RequestBody BaseModel modelSearchRequest) throws IOException {
+    List<BaseModel> models = esService.fetchModelsWithShouldQuery(modelSearchRequest);
+    return ResponseEntity.ok(models);
   }
 
   @PostMapping("/index")
-  public ResponseEntity<String> insertRecords(@RequestBody Employee employee) throws IOException {
-    String status = esService.insertEmployee(employee);
+  public ResponseEntity<String> insertRecords(@RequestBody BaseModel model) throws IOException {
+    String status = esService.insertModel(model);
     log.info("insert record status: {}", status);
     return ResponseEntity.ok(status);
   }
 
   @PostMapping("/index/bulk")
-  public ResponseEntity<String> bulkInsertEmployees(@RequestBody List<Employee> employees)
+  public ResponseEntity<String> bulkInsertModels(@RequestBody List<BaseModel> models)
       throws IOException {
-    boolean isSuccess = esService.bulkInsertEmployees(employees);
+    boolean isSuccess = esService.bulkInsertModels(models);
     if (isSuccess) {
       return ResponseEntity.ok("Records successfully ingested!");
     } else {
@@ -57,14 +57,14 @@ public class ESRestController {
   }
 
   @DeleteMapping("/index/{id}")
-  public ResponseEntity<String> deleteEmployee(@PathVariable("id") Long id) throws IOException {
-    String status = esService.deleteEmployeeById(id);
+  public ResponseEntity<String> deleteModel(@PathVariable("id") String id) throws IOException {
+    String status = esService.deleteModelById(id);
     return ResponseEntity.ok(status);
   }
 
   @PutMapping("/index")
-  public ResponseEntity<String> updateEmployee(@RequestBody Employee employee) throws IOException {
-    String status = esService.updateEmployee(employee);
+  public ResponseEntity<String> updateModel(@RequestBody BaseModel model) throws IOException {
+    String status = esService.updateModel(model);
     return ResponseEntity.ok(status);
   }
 }

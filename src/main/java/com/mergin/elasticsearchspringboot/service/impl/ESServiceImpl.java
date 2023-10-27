@@ -2,7 +2,7 @@ package com.mergin.elasticsearchspringboot.service.impl;
 
 import com.mergin.elasticsearchspringboot.connector.ESClientConnector;
 import com.mergin.elasticsearchspringboot.exception.RecordNotFoundException;
-import com.mergin.elasticsearchspringboot.model.Employee;
+import com.mergin.elasticsearchspringboot.model.BaseModel;
 import com.mergin.elasticsearchspringboot.service.ESService;
 import java.io.IOException;
 import java.util.List;
@@ -16,37 +16,37 @@ public class ESServiceImpl implements ESService {
   private final ESClientConnector esClientConnector;
 
   @Override
-  public Employee fetchEmployeeById(String id) throws RecordNotFoundException, IOException {
-    return esClientConnector.fetchEmployeeById(id);
+  public BaseModel fetchModelById(String id) throws RecordNotFoundException, IOException {
+    return esClientConnector.fetchModelById(id);
   }
 
   @Override
-  public String insertEmployee(Employee employee) throws IOException {
-    return esClientConnector.insertEmployee(employee);
+  public String insertModel(BaseModel model) throws IOException {
+    return esClientConnector.insertModel(model);
   }
 
   @Override
-  public boolean bulkInsertEmployees(List<Employee> employees) throws IOException {
-    return esClientConnector.bulkInsertEmployees(employees);
+  public boolean bulkInsertModels(List<BaseModel> models) throws IOException {
+    return esClientConnector.bulkInsertModels(models);
   }
 
   @Override
-  public List<Employee> fetchEmployeesWithMustQuery(Employee employee) throws IOException {
-    return esClientConnector.fetchEmployeesWithMustQuery(employee);
+  public List<BaseModel> fetchModelsWithMustQuery(BaseModel model) throws IOException {
+    return esClientConnector.fetchModelsWithMustQuery(model);
   }
 
   @Override
-  public List<Employee> fetchEmployeesWithShouldQuery(Employee employee) throws IOException {
-    return esClientConnector.fetchEmployeesWithShouldQuery(employee);
+  public List<BaseModel> fetchModelsWithShouldQuery(BaseModel model) throws IOException {
+    return esClientConnector.fetchModelsWithShouldQuery(model);
   }
 
   @Override
-  public String deleteEmployeeById(Long id) throws IOException {
-    return esClientConnector.deleteEmployeeById(id);
+  public String deleteModelById(String id) throws IOException {
+    return esClientConnector.deleteModelById(id);
   }
 
   @Override
-  public String updateEmployee(Employee employee) throws IOException {
-    return esClientConnector.updateEmployee(employee);
+  public String updateModel(BaseModel model) throws IOException {
+    return esClientConnector.updateModel(model);
   }
 }

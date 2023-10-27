@@ -1,23 +1,23 @@
 package com.mergin.elasticsearchspringboot.service;
 
 import com.mergin.elasticsearchspringboot.exception.RecordNotFoundException;
-import com.mergin.elasticsearchspringboot.model.Employee;
+import com.mergin.elasticsearchspringboot.model.BaseModel;
 import java.io.IOException;
 import java.util.List;
 
 public interface ESService {
 
-  Employee fetchEmployeeById(String id) throws RecordNotFoundException, IOException;
+  BaseModel fetchModelById(String id) throws RecordNotFoundException, IOException;
 
-  String insertEmployee(Employee employee) throws IOException;
+  String insertModel(BaseModel model) throws IOException;
 
-  boolean bulkInsertEmployees(List<Employee> employees) throws IOException;
+  boolean bulkInsertModels(List<BaseModel> models) throws IOException;
 
-  List<Employee> fetchEmployeesWithMustQuery(Employee employee) throws IOException;
+  List<BaseModel> fetchModelsWithMustQuery(BaseModel model) throws IOException;
 
-  List<Employee> fetchEmployeesWithShouldQuery(Employee employee) throws IOException;
+  List<BaseModel> fetchModelsWithShouldQuery(BaseModel model) throws IOException;
 
-  String deleteEmployeeById(Long id) throws IOException;
+  String deleteModelById(String id) throws IOException;
 
-  String updateEmployee(Employee employee) throws IOException;
+  String updateModel(BaseModel model) throws IOException;
 }
