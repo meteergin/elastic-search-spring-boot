@@ -2,12 +2,17 @@ package com.mergin.elasticsearchspringboot;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.mergin.elasticsearchspringboot.model.BaseModel;
+import com.mergin.elasticsearchspringboot.model.Country;
 import com.mergin.elasticsearchspringboot.model.CountryList;
 import com.mergin.elasticsearchspringboot.service.ESService;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +20,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @RequiredArgsConstructor
+@Slf4j
 public class ElasticsearchSpringbootApplication implements CommandLineRunner {
 
   private final ESService esService;
@@ -42,38 +48,16 @@ public class ElasticsearchSpringbootApplication implements CommandLineRunner {
               country.setCreatedAt(new Date());
               try {
                 esService.insertModel(country);
-                System.out.println(country);
+                log.info(String.valueOf(country));
               } catch (IOException e) {
                 throw new RuntimeException(e);
               }
             });
 
-    //      Faker faker = new Faker();
-    //
-    //    IntStream.range(0, 1000)
-    //        .forEach(
-    //            value -> {
-    //                String firstName = faker.name().firstName();
-    //                String lastName = faker.name().lastName();
-    //                int size = faker.number().randomDigit();
-    //                String email = faker.internet().emailAddress();
-    //                String id = faker.internet().uuid();
-    //
-    //                Employee m =
-    //                  Employee.builder()
-    //                      .id(id)
-    //                      .email(email)
-    //                      .gender("M")
-    //                      .firstName(firstName)
-    //                      .lastName(lastName)
-    //                      .size(size)
-    //                      .build();
-    //
-    //              try {
-    //                esService.insertModel(m);
-    //              } catch (IOException e) {
-    //                throw new RuntimeException(e);
-    //              }
-    //            });
+
+//      Country country = new Country();
+//      country.setName("0");
+//
+//      esService.fetchModelsWithShouldQuery(country).forEach(model -> System.out.println(model));
   }
 }

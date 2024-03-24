@@ -24,10 +24,10 @@ public class Country extends BaseModel {
   private String region;
 
   @JsonProperty("Population")
-  private String population;
+  private Long population;
 
   @JsonProperty("Area (sq. mi.)")
-  private String area;
+  private Long area;
 
   @JsonProperty("Pop. Density (per sq. mi.)")
   private String pop;
@@ -42,7 +42,7 @@ public class Country extends BaseModel {
   private String infantMortality;
 
   @JsonProperty("GDP ($ per capita)")
-  private String gdp;
+  private Integer gdp;
 
   @JsonProperty("Literacy (%)")
   private String literacy;
